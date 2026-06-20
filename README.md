@@ -20,25 +20,83 @@
 
 ---
 
+## 两类 Skill：整理与优化
+
+本仓库将 Skill 按来源与处理方式分为两层目录，职责清晰、便于对照：
+
+### `qoder-marketplace/` — 第三方 Skill 整理
+
+收录来自 [Qoder Skill Marketplace](https://qoder.com/marketplace) 等渠道的**原版 skill**，做统一归档，**不改动** `SKILL.md` 正文。
+
+整理原则：
+
+| 原则 | 说明 |
+|------|------|
+| **忠实转载** | 从官方市场下载原版 zip，保持 `SKILL.md` 与上游一致 |
+| **来源可追溯** | 每个 skill 文件夹必有 `README.md`，写明市场链接、作者、许可与收录日期 |
+| **命名规范** | 文件夹统一为 `qoder-marketplace-<skill-name>-skill/`，标明来源平台 |
+| **即拷即用** | 可直接复制到 `~/.cursor/skills/` 或 Qoder 客户端使用 |
+
+适合：想使用**未经改动的官方版本**、需要与上游对照、或作为 fork 基线。
+
+### `samoyed/` — Samoyed 在第三方 Skill 上的优化
+
+在 `qoder-marketplace/` 原版基础上，由 **Samoyed** 做**有记录的 fork 与改写**，针对实际使用场景补强工作流、输出策略与示例。
+
+优化原则：
+
+| 原则 | 说明 |
+|------|------|
+| **fork 有据** | 每个改版 skill 在 `README.md` 中列出相对上游的 diff 表 |
+| **改动可追** | `SKILL.md` 文末附修改日志，记录每次语义变更 |
+| **职责分离** | 改版与原版分目录存放，避免覆盖上游文件 |
+| **命名区分** | 文件夹为 `samoyed-<来源>-<skill-name>-skill/`，一眼可辨改版身份 |
+
+适合：需要**针对中文/学术/团队场景优化**、希望自动分流输出策略、或要与原版并排对比时。
+
+> **选用建议**：默认用 `samoyed/` 改版；若需严格对齐 Qoder 官方行为，用 `qoder-marketplace/` 原版。两者 `SKILL.md` 中 `name` 字段可相同，安装时请注意文件夹名区分。
+
+---
+
 ## 目录结构
 
 ```
 samoyed-water-skills-git/
 ├── README.md                 # 本文件
-├── qoder-nature-writting/    # 自然写作 Skill
-│   └── SKILL.md
-└── ...                       # 更多 Skill / Rule 将陆续加入
+├── qoder-marketplace/        # 第三方 skill 整理（原版转载）
+│   ├── qoder-marketplace-nature-writting-skill/
+│   ├── qoder-marketplace-translation-skill/
+│   └── qoder-marketplace-qoderwork-ppt-skill/
+├── samoyed/                  # Samoyed 对第三方 skill 的优化改版
+│   └── samoyed-qoder-marketplace-translation-skill/
+├── rules/                    # 仓库级 Cursor Rule
+└── hooks/                    # Git 提交规范钩子
 ```
 
-每个 Skill 以独立文件夹存放，核心文件为 `SKILL.md`（含 YAML 元数据与正文说明）。可选附带 `reference.md`、`examples.md`、脚本等辅助文件。
+每个 Skill 以独立文件夹存放，**必须**包含：
+
+- `README.md` — 来源、适用场景、与上游 diff（改版 skill 必需）
+- `SKILL.md` — 技能主文件（含 YAML 元数据与正文说明）
+
+可选附带 `reference.md`、`examples.md`、`scripts/`、`templates/` 等辅助文件。
 
 ---
 
 ## 技能目录
 
+### 第三方整理（`qoder-marketplace/`）
+
 | 文件夹 | 名称 | 说明 | 来源 |
 |--------|------|------|------|
-| [`qoder-nature-writting/`](qoder-nature-writting/) | Natural Writing | 让 AI 写出更像人写的文字，减少「AI 味」 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official_yiUuEwlt) |
+| [`qoder-marketplace/qoder-marketplace-nature-writting-skill/`](qoder-marketplace/qoder-marketplace-nature-writting-skill/) | Natural Writing | 让 AI 写出更像人写的文字，减少「AI 味」 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official_yiUuEwlt) |
+| [`qoder-marketplace/qoder-marketplace-translation-skill/`](qoder-marketplace/qoder-marketplace-translation-skill/) | Translation | 多语言翻译，兼顾文化适配与术语一致性 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official_z9j4cquB) |
+| [`qoder-marketplace/qoder-marketplace-qoderwork-ppt-skill/`](qoder-marketplace/qoder-marketplace-qoderwork-ppt-skill/) | QoderWork PPT | 生成 QoderWork 风格演示文稿，自动匹配 14 种模板 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official48186468) |
+
+### Samoyed 优化（`samoyed/`）
+
+| 文件夹 | 名称 | 基于上游 | 主要优化 |
+|--------|------|----------|----------|
+| [`samoyed/samoyed-qoder-marketplace-translation-skill/`](samoyed/samoyed-qoder-marketplace-translation-skill/) | Translation（改版） | [Translation 原版](qoder-marketplace/qoder-marketplace-translation-skill/) | 源文表达审查；按问题自动单译/双译；精修译与源文修改对照表 |
 
 > 有新技能？欢迎提 Issue 或 PR，我们会更新上表。
 
@@ -48,17 +106,17 @@ samoyed-water-skills-git/
 
 ### 在 Cursor 中使用 Skill
 
-1. 将对应文件夹复制到以下位置之一：
-   - **个人全局**：`~/.cursor/skills/<skill-name>/`
-   - **当前项目**：`<项目根目录>/.cursor/skills/<skill-name>/`
-2. 确保文件夹内有 `SKILL.md`。
-3. 在对话中提及相关任务（如「帮我润色这段文字，要更自然」），Agent 会根据 `description` 自动匹配并读取该 Skill。
+1. 从 `qoder-marketplace/`（原版）或 `samoyed/`（改版）选取文件夹，复制到：
+   - **个人全局**：`~/.cursor/skills/<folder-name>/`
+   - **当前项目**：`<项目根目录>/.cursor/skills/<folder-name>/`
+2. 确保文件夹内有 `SKILL.md`；含 `package.json` 的 skill（如 QoderWork PPT）需先执行 `npm install`。
+3. 在对话中描述任务，Agent 会根据 `description` 自动匹配并读取该 Skill。
 
 > 注意：请勿将技能放入 `~/.cursor/skills-cursor/`，该目录为 Cursor 内置技能保留。
 
 ### 在 Qoder 中使用
 
-部分技能来自 [Qoder Skill Marketplace](https://qoder.com/marketplace)。你也可以直接将本仓库中的 `SKILL.md` 导入或复制到 Qoder 的自定义 Skill 配置中。
+部分技能来自 [Qoder Skill Marketplace](https://qoder.com/marketplace)。`qoder-marketplace/` 下的文件夹与官方市场内容一致，可直接导入 Qoder 客户端；`samoyed/` 改版请按需复制 `SKILL.md` 到自定义 Skill 配置。
 
 ### 作为 Rule 使用
 
@@ -80,11 +138,20 @@ samoyed-water-skills-git/
 3. 在 README 的「技能目录」表中补充一行说明
 4. 提交 **Pull Request**，简要描述用途与适用场景
 
-### 新增 Skill 的推荐格式
+### 新增第三方 skill（整理）
+
+放入 `qoder-marketplace/`，保持 `SKILL.md` 与上游一致，并在 `README.md` 中注明来源链接。
+
+### 新增 Samoyed 改版（优化）
+
+放入 `samoyed/`，在 `README.md` 中提供相对上游的 diff 表，在 `SKILL.md` 文末维护修改日志。
+
+### 推荐文件夹格式
 
 ```
 your-skill-name/
-├── SKILL.md          # 必需
+├── README.md         # 必需：来源与基本信息（改版须含 diff）
+├── SKILL.md          # 必需：技能主文件
 ├── reference.md      # 可选：详细参考
 ├── examples.md       # 可选：示例
 └── scripts/          # 可选：辅助脚本
@@ -104,9 +171,10 @@ description: >
 
 ### 命名建议
 
-- 文件夹名：小写英文 + 连字符，如 `nature-writing`、`pr-review`
-- `name` 字段：与文件夹名保持一致或语义相近
-- 若源自第三方市场，可在文件夹内保留来源链接（如 `.webloc` 或 `SOURCE.md`）
+- 第三方整理：`qoder-marketplace-<skill-name>-skill/`
+- Samoyed 改版：`samoyed-<来源>-<skill-name>-skill/`
+- `name` 字段可与上游保持一致，便于 `@` 引用；以**文件夹名**区分安装路径
+- **每个 skill 文件夹必须有 `README.md`**，写明来源链接与基本信息
 
 ---
 
@@ -114,6 +182,7 @@ description: >
 
 - 各 Skill 的版权归原作者所有；本仓库注明来源并仅供学习与交流使用。
 - 从 Qoder、Cursor 社区等渠道收录的技能，请保留原始出处信息。
+- `samoyed/` 改版基于上游开源 skill，遵循原许可并在 README 中标注 fork 关系。
 - 若你认为某内容侵犯权益，请通过 Issue 联系我们，我们会及时处理。
 
 ---
