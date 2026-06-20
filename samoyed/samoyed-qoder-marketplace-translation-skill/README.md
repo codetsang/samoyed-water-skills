@@ -1,4 +1,4 @@
-# Translation / 翻译（Samoyed 改版）
+# Translation / 翻译（耶耶优化版）
 
 > 在不同语言之间翻译文本，兼顾文化适配、术语一致性与多种文档类型；**在忠实翻译之外，可按源文质量自动决定是否附带精修译文**。
 
@@ -21,7 +21,7 @@
 | 双输出交付格式 | 无 | 固定顺序：(1) 源文审查 (2) 忠实译 (3) 精修译 (4) **源文修改 / Source edits** 对照表 |
 | 示例 | 2 个 | 保留原 2 例，新增 **Example 3**（英→中学术句，演示审查触发双输出） |
 | `SKILL.md` 文末 | 无 | 追加 **修改日志** |
-| 存放位置 | `qoder-marketplace/` 转载目录 | `samoyed/` 改版目录 |
+| 存放位置 | `qoder-marketplace/` 转载目录 | `samoyed/` 耶耶优化版 |
 
 **未改动的部分**：`name: translation`、MIT 许可、workflow 步骤 1 与 3–7 的核心意图，以及原 Example 1、Example 2。
 

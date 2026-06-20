@@ -39,9 +39,9 @@
 
 适合：想使用**未经改动的官方版本**、需要与上游对照、或作为 fork 基线。
 
-### `samoyed/` — Samoyed 在第三方 Skill 上的优化
+### 耶耶优化版（`samoyed/`）
 
-在 `qoder-marketplace/` 原版基础上，由 **Samoyed** 做**有记录的 fork 与改写**，针对实际使用场景补强工作流、输出策略与示例。
+在 `qoder-marketplace/` 原版基础上，由 **耶耶** 做**有记录的 fork 与改写**，针对实际使用场景补强工作流、输出策略与示例。
 
 优化原则：
 
@@ -54,7 +54,7 @@
 
 适合：需要**针对中文/学术/团队场景优化**、希望自动分流输出策略、或要与原版并排对比时。
 
-> **选用建议**：默认用 `samoyed/` 改版；若需严格对齐 Qoder 官方行为，用 `qoder-marketplace/` 原版。两者 `SKILL.md` 中 `name` 字段可相同，安装时请注意文件夹名区分。
+> **选用建议**：默认用 `samoyed/` 耶耶优化版；若需严格对齐 Qoder 官方行为，用 `qoder-marketplace/` 原版。两者 `SKILL.md` 中 `name` 字段可相同，安装时请注意文件夹名区分。
 
 ---
 
@@ -67,10 +67,9 @@ samoyed-water-skills-git/
 │   ├── qoder-marketplace-nature-writting-skill/
 │   ├── qoder-marketplace-translation-skill/
 │   └── qoder-marketplace-qoderwork-ppt-skill/
-├── samoyed/                  # Samoyed 对第三方 skill 的优化改版
+├── samoyed/                  # 耶耶优化版
 │   └── samoyed-qoder-marketplace-translation-skill/
-├── rules/                    # 仓库级 Cursor Rule
-└── hooks/                    # Git 提交规范钩子
+└── ...                       # 更多 Skill / Rule 将陆续加入
 ```
 
 每个 Skill 以独立文件夹存放，**必须**包含：
@@ -92,11 +91,11 @@ samoyed-water-skills-git/
 | [`qoder-marketplace/qoder-marketplace-translation-skill/`](qoder-marketplace/qoder-marketplace-translation-skill/) | Translation | 多语言翻译，兼顾文化适配与术语一致性 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official_z9j4cquB) |
 | [`qoder-marketplace/qoder-marketplace-qoderwork-ppt-skill/`](qoder-marketplace/qoder-marketplace-qoderwork-ppt-skill/) | QoderWork PPT | 生成 QoderWork 风格演示文稿，自动匹配 14 种模板 | [Qoder Marketplace](https://qoder.com/marketplace/skill?id=official48186468) |
 
-### Samoyed 优化（`samoyed/`）
+### 耶耶优化版（`samoyed/`）
 
 | 文件夹 | 名称 | 基于上游 | 主要优化 |
 |--------|------|----------|----------|
-| [`samoyed/samoyed-qoder-marketplace-translation-skill/`](samoyed/samoyed-qoder-marketplace-translation-skill/) | Translation（改版） | [Translation 原版](qoder-marketplace/qoder-marketplace-translation-skill/) | 源文表达审查；按问题自动单译/双译；精修译与源文修改对照表 |
+| [`samoyed/samoyed-qoder-marketplace-translation-skill/`](samoyed/samoyed-qoder-marketplace-translation-skill/) | Translation（耶耶优化版） | [Translation 原版](qoder-marketplace/qoder-marketplace-translation-skill/) | 源文表达审查；按问题自动单译/双译；精修译与源文修改对照表 |
 
 > 有新技能？欢迎提 Issue 或 PR，我们会更新上表。
 
@@ -106,7 +105,7 @@ samoyed-water-skills-git/
 
 ### 在 Cursor 中使用 Skill
 
-1. 从 `qoder-marketplace/`（原版）或 `samoyed/`（改版）选取文件夹，复制到：
+1. 从 `qoder-marketplace/`（原版）或 `samoyed/`（耶耶优化版）选取文件夹，复制到：
    - **个人全局**：`~/.cursor/skills/<folder-name>/`
    - **当前项目**：`<项目根目录>/.cursor/skills/<folder-name>/`
 2. 确保文件夹内有 `SKILL.md`；含 `package.json` 的 skill（如 QoderWork PPT）需先执行 `npm install`。
@@ -116,7 +115,7 @@ samoyed-water-skills-git/
 
 ### 在 Qoder 中使用
 
-部分技能来自 [Qoder Skill Marketplace](https://qoder.com/marketplace)。`qoder-marketplace/` 下的文件夹与官方市场内容一致，可直接导入 Qoder 客户端；`samoyed/` 改版请按需复制 `SKILL.md` 到自定义 Skill 配置。
+部分技能来自 [Qoder Skill Marketplace](https://qoder.com/marketplace)。`qoder-marketplace/` 下的文件夹与官方市场内容一致，可直接导入 Qoder 客户端；`samoyed/` 耶耶优化版请按需复制 `SKILL.md` 到自定义 Skill 配置。
 
 ### 作为 Rule 使用
 
@@ -142,7 +141,7 @@ samoyed-water-skills-git/
 
 放入 `qoder-marketplace/`，保持 `SKILL.md` 与上游一致，并在 `README.md` 中注明来源链接。
 
-### 新增 Samoyed 改版（优化）
+### 新增耶耶优化版
 
 放入 `samoyed/`，在 `README.md` 中提供相对上游的 diff 表，在 `SKILL.md` 文末维护修改日志。
 
@@ -172,7 +171,7 @@ description: >
 ### 命名建议
 
 - 第三方整理：`qoder-marketplace-<skill-name>-skill/`
-- Samoyed 改版：`samoyed-<来源>-<skill-name>-skill/`
+- 耶耶优化版：`samoyed-<来源>-<skill-name>-skill/`
 - `name` 字段可与上游保持一致，便于 `@` 引用；以**文件夹名**区分安装路径
 - **每个 skill 文件夹必须有 `README.md`**，写明来源链接与基本信息
 
@@ -182,7 +181,7 @@ description: >
 
 - 各 Skill 的版权归原作者所有；本仓库注明来源并仅供学习与交流使用。
 - 从 Qoder、Cursor 社区等渠道收录的技能，请保留原始出处信息。
-- `samoyed/` 改版基于上游开源 skill，遵循原许可并在 README 中标注 fork 关系。
+- `samoyed/` 耶耶优化版基于上游开源 skill，遵循原许可并在 README 中标注 fork 关系。
 - 若你认为某内容侵犯权益，请通过 Issue 联系我们，我们会及时处理。
 
 ---

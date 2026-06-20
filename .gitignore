@@ -4,6 +4,8 @@
 
 # 本地脚本目录
 scripts/
+hooks/
+rules/
 
 # 常见系统文件
 .DS_Store
