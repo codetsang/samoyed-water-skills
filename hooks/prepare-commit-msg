@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Strip Cursor / AI attribution trailers before commit-msg validation.
+
+set -euo pipefail
+
+MSG_FILE="${1:?commit message file required}"
+
+# macOS sed requires '' after -i; Linux uses sed -i without ''.
+if sed --version >/dev/null 2>&1; then
+  sed -i \
+    -e '/^Co-authored-by:.*[Cc]ursor/d' \
+    -e '/^Assisted-by:.*[Cc]ursor/d' \
+    -e '/^Made-with:.*[Cc]ursor/d' \
+    -e '/cursoragent@cursor\.com/d' \
+    -e '/noreply@cursor\.com/d' \
+    "$MSG_FILE"
+else
+  sed -i '' \
+    -e '/^Co-authored-by:.*[Cc]ursor/d' \
+    -e '/^Assisted-by:.*[Cc]ursor/d' \
+    -e '/^Made-with:.*[Cc]ursor/d' \
+    -e '/cursoragent@cursor\.com/d' \
+    -e '/noreply@cursor\.com/d' \
+    "$MSG_FILE"
+fi
+
+exit 0

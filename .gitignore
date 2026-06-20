@@ -1,0 +1,10 @@
+# 忽略隐藏目录与文件（macOS / IDE / 编辑器）
+.*
+!.gitignore
+
+# 本地脚本目录
+scripts/
+
+# 常见系统文件
+.DS_Store
+Thumbs.db
